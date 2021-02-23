@@ -3,8 +3,10 @@ using UnityEngine;
 
 public class UnitGroup : MonoBehaviour {
     [SerializeField] private TMPro.TextMeshPro healthText;
+    public bool canMove;
 
     private Dictionary<UnitType, List<Unit>> unitGroup;
+    
 
     private void Awake() {
         unitGroup = new Dictionary<UnitType, List<Unit>>();
@@ -12,6 +14,7 @@ public class UnitGroup : MonoBehaviour {
 
     private void Start() {
         healthText.SetText(GetHealth().ToString());
+        canMove = true;
     }
 
     private void AddUnit(Unit unit) {

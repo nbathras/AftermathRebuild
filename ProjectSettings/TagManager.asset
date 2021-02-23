@@ -41,6 +41,9 @@ TagManager:
   - name: Background
     uniqueID: 1071290401
     locked: 0
+  - name: Higlight
+    uniqueID: 349939351
+    locked: 0
   - name: UnitGroups
     uniqueID: 3587113779
     locked: 0
