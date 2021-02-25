@@ -77,13 +77,15 @@ public class UnitGroupDragDropMovementController : MonoBehaviour {
             new Vector3Int(1, 1, 0),
         };
 
+        Vector3Int[] neighborsToUse;
         if (Mathf.Abs(currentPlayerTile.y) % 2 == 0) {
-            foreach (Vector3Int n in neighborsEven) {
-                highlightTilemap.SetTile(currentPlayerTile + n, highlightTile);
-                previousHighlightPositions.Add(currentPlayerTile + n);
-            }
+            neighborsToUse = neighborsEven;
         } else {
-            foreach (Vector3Int n in neighborsOdd) {
+            neighborsToUse = neighborsOdd;
+        }
+
+        foreach (Vector3Int n in neighborsToUse) {
+            if (GameTileManager.instance.IsTileMoveable(currentPlayerTile + n)) {
                 highlightTilemap.SetTile(currentPlayerTile + n, highlightTile);
                 previousHighlightPositions.Add(currentPlayerTile + n);
             }

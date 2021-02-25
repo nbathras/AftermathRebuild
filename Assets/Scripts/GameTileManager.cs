@@ -6,8 +6,9 @@ public class GameTileManager : MonoBehaviour {
 
     public static GameTileManager instance;
 
-    private Tilemap tilemap;
-    private Dictionary<Vector2, GameTile> tiles;
+    [SerializeField] private Tilemap tilemap;
+
+    private Dictionary<Vector3Int, GameTile> tiles;
 
     private void Awake() {
         if (instance == null) {
@@ -22,13 +23,13 @@ public class GameTileManager : MonoBehaviour {
     }
 
     private void GetGameTiles() {
-        tiles = new Dictionary<Vector2, GameTile>();
+        tiles = new Dictionary<Vector3Int, GameTile>();
         
         foreach (Vector3Int pos in tilemap.cellBounds.allPositionsWithin) {
-
             if (!tilemap.HasTile(pos)) { continue; }
+
             tiles.Add(
-                tilemap.CellToWorld(pos),
+                pos,
                 new GameTile(
                     pos,
                     tilemap.CellToWorld(pos),
@@ -37,5 +38,11 @@ public class GameTileManager : MonoBehaviour {
                 )
             );
         }
+
+        Debug.Log(tiles.Count);
+    }
+
+    public bool IsTileMoveable(Vector3Int cell) {
+        return tiles.ContainsKey(cell);
     }
 }
